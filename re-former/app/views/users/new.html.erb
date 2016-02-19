@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>New User: </h1>
+
+	<!-- Vanilla Form -->
+	<!-- <form action="/users" method="post" accept-charset="UTF-8">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"></input>
+		Username <input type="text" name="user[username]"></input>
+		Email <input type="text" name="user[email]"></input>
+		Password <input type="password" name="user[password]"></input>
+		<input type="submit" value="Submit"></input>
+	</form> -->
+
+	<!-- Railsy Form with #form_tag-->
+	<!-- <%= form_tag("/users", method: "post") do %>
+
+		<%= label_tag(:username, "Username: ") %>
+		<%= text_field_tag(:username) %> <br>
+
+		<%= label_tag(:email, "Email: ") %>
+		<%= text_field_tag(:email) %> <br>
+
+		<%= label_tag(:password, "Password: ") %>
+		<%= password_field_tag(:password) %> <br>
+
+		<%= submit_tag("Submit") %>
+	<% end %> -->
+
+	<!-- Rails Form with #form_for -->
+	<%= form_for @user do |f| %>
+		<ul>
+			<% @user.errors.full_messages.each do |error| %>
+				<li><%= error %></li>
+			<% end %>
+		</ul>
+		<p>
+			<%= f.label :username %> 
+			<%= f.text_field :username %>
+		</p>
+		<p>
+			<%= f.label :email %>
+			<%= f.text_field :email, value: "example@example.com" %>
+		</p>
+		<p>
+			<%= f.label :password %>
+			<%= f.password_field :password %>
+		</p>
+		<%= f.submit "Submit" %>
+	<% end %>
+
+
+</body>
+</html>
